@@ -43,7 +43,7 @@ export default function Home() {
     const toggleSidebar = () => setOpen(!open);
 
     return (
-        <main>
+        <main className=''>
             <div className='flex justify-between px-14 py-5 md:py-7 shadow items-center'>
                 {/* Logo */}
                 <AiFillClockCircle className='text-gray-700 h-10 w-10'/>
