@@ -141,7 +141,7 @@ const AdminPage = () => {
 
                   {isDeleted && (
                     <div class="fixed z-10 inset-0 overflow-y-auto">
-                      <div class="flex items-center justify-center mt-14">
+                      <div class="flex items-center justify-center m-14">
                         <div className="relative bg-red-100 rounded-lg text-center shadow-lg p-3">
                           <div className="px-7 py-4">
                             <h2 className="text-md font-medium text-gray-700">Are you sure you want to delete this employee?</h2>
