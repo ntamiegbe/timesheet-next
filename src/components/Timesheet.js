@@ -63,8 +63,8 @@ function TimeSheet() {
     };
 
     return (
-        <div className="bg-gray-100 mt-14 h-[70vh] pb-20 mx-auto max-w-[60rem]">
-            <div className="rounded-md bg-white m-8 md:mx-0 shadow-md p-10">
+        <div className="bg-gray-100 mt-14 mx-auto max-w-[60rem]">
+            <div className="rounded-md bg-white mx-8 md:mx-0 shadow-md p-7">
                 <div className="flex justify-between items-center mb-2">
                     <h1 className="text-2xl md:text-4xl font-bold text-gray-700 uppercase">TimeSheet</h1>
                     <AiOutlineClockCircle className="h-10 w-10 text-gray-700" />
