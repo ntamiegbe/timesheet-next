@@ -45,11 +45,8 @@ export default function Home() {
     return (
         <main>
             <div className='flex justify-between px-14 py-7 shadow items-center'>
-                {/* <h1>Logo</h1> */}
+                {/* Logo */}
                 <AiFillClockCircle className='text-gray-700 h-10 w-10'/>
-                {/* <div>
-                    <Image src={Logo} alt='Logo' width={100} height={100} />
-                </div> */}
 
                 {/* Menu links */}
                 <div>

@@ -53,8 +53,8 @@ function TimeSheet() {
     };
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center mx-14 md:mx-0">
-            <div className="w-full md:w-[50vw] rounded-md bg-white shadow-lg p-10">
+        <div className="bg-gray-100 mt-14 h-[70vh] pb-20 mx-auto max-w-[60rem]">
+            <div className="rounded-md bg-white m-8 md:mx-0 shadow-md p-10">
                 <div className="flex justify-between items-center mb-2">
                     <h1 className="text-4xl font-bold text-gray-700 uppercase">TimeSheet</h1>
                     <AiOutlineClockCircle className="h-10 w-10 text-gray-700" />
@@ -87,13 +87,15 @@ function TimeSheet() {
                     </div>
                 )}
                 <h2 className="text-2xl uppercase font-bold text-gray-700 mt-5">History</h2>
-                {clockTimes.map((clockTime, index) => (
-                    <div key={index} className="my-4 bg-gray-100 p-4 rounded-xl">
-                        <p className='text-lg text-gray-700'>Clocked in at {new Date(clockTime.clockInTime).toLocaleTimeString()}</p>
-                        <p className='text-lg text-gray-700 my-2'>Duration worked: <span className='font-semibold  text-green-500'>{formatTime(clockTime.elapsedTime)}</span></p>
-                        <p className='text-lg text-gray-700'>Date: {clockTime.selectedDate}</p>
-                    </div>
-                ))}
+                <div className="max-h-[200px] overflow-y-scroll mt-10">
+                    {clockTimes.map((clockTime, index) => (
+                        <div key={index} className="m-4 bg-gray-100 p-4 rounded-xl">
+                            <p className='text-lg text-gray-700'>Clocked in at {new Date(clockTime.clockInTime).toLocaleTimeString()}</p>
+                            <p className='text-lg text-gray-700 my-2'>Duration worked: <span className='font-semibold  text-green-500'>{formatTime(clockTime.elapsedTime)}</span></p>
+                            <p className='text-lg text-gray-700'>Date: {clockTime.selectedDate}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
