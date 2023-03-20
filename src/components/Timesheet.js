@@ -11,15 +11,23 @@ function TimeSheet() {
     const [clockTimes, setClockTimes] = useState([]);
 
     useEffect(() => {
+
+        // A variable that will be used to store the ID of the interval timer.
         let intervalId;
+
+        // checks if the user is clocked in. If they are, it sets up a new interval timer that will update the elapsed time every second.
         if (isClockedIn) {
             intervalId = setInterval(() => {
+                // calculates the elapsed time by subtracting the clockInTime from the current time, and updates the elapsedTime state variable
                 setElapsedTime(Date.now() - clockInTime);
             }, 1000);
         }
+
+        // cleans up the interval timer when the useEffect hook is unmounted or re-run.
         return () => clearInterval(intervalId);
     }, [isClockedIn, clockInTime]);
 
+    // reads from the local storage to retrieve previously saved data.
     useEffect(() => {
         const storedClockTimes = localStorage.getItem('clockTimes');
         if (storedClockTimes) {
@@ -47,6 +55,8 @@ function TimeSheet() {
             elapsedTime,
             selectedDate,
         };
+
+        // creates a new array that adds the newClockTime object to the end of the clockTimes array
         const updatedClockTimes = [...clockTimes, newClockTime];
         setClockTimes(updatedClockTimes);
         localStorage.setItem('clockTimes', JSON.stringify(updatedClockTimes));
@@ -56,12 +66,12 @@ function TimeSheet() {
         <div className="bg-gray-100 mt-14 h-[70vh] pb-20 mx-auto max-w-[60rem]">
             <div className="rounded-md bg-white m-8 md:mx-0 shadow-md p-10">
                 <div className="flex justify-between items-center mb-2">
-                    <h1 className="text-4xl font-bold text-gray-700 uppercase">TimeSheet</h1>
+                    <h1 className="text-2xl md:text-4xl font-bold text-gray-700 uppercase">TimeSheet</h1>
                     <AiOutlineClockCircle className="h-10 w-10 text-gray-700" />
                 </div>
                 <div className="flex justify-start space-x-2 items-center mb-5">
-                    <label htmlFor="" className='text-lg text-gray-700'>Select Date:</label>
-                    <input type="date" className='my-3 border px-4 py-1 border-gray-7   00 rounded-lg' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+                    <label htmlFor="" className='md:text-lg text-base text-gray-700'>Select Date:</label>
+                    <input type="date" className='my-3 border px-4 py-1 border-gray-700 rounded-lg' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
                 </div>
                 {!isClockedIn && (
                     <button
@@ -86,8 +96,8 @@ function TimeSheet() {
                         </button>
                     </div>
                 )}
-                <h2 className="text-2xl uppercase font-bold text-gray-700 mt-5">History</h2>
-                <div className="max-h-[200px] overflow-y-scroll mt-10">
+                <h2 className="md:text-2xl text-xl uppercase font-bold text-gray-700 my-5">History</h2>
+                <div className="max-h-[200px] overflow-y-scroll">
                     {clockTimes.map((clockTime, index) => (
                         <div key={index} className="m-4 bg-gray-100 p-4 rounded-xl">
                             <p className='text-lg text-gray-700'>Clocked in at {new Date(clockTime.clockInTime).toLocaleTimeString()}</p>
