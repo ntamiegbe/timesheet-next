@@ -97,7 +97,7 @@ function TimeSheet() {
                     </div>
                 )}
                 <h2 className="md:text-2xl text-xl uppercase font-bold text-gray-700 my-5">History</h2>
-                <div className="max-h-[200px] overflow-y-scroll">
+                <div className="h-56 overflow-y-scroll">
                     {clockTimes.map((clockTime, index) => (
                         <div key={index} className="m-4 bg-gray-100 p-4 rounded-xl">
                             <p className='text-lg text-gray-700'>Clocked in at {new Date(clockTime.clockInTime).toLocaleTimeString()}</p>

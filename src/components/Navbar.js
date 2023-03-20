@@ -30,7 +30,7 @@ export default function Home() {
             <Link
                 key={item.menu}
                 href={item.link}
-                className='p-5 rounded-lg mx-7 text-xl font-medium text-gray-700 hover:bg-white md:hover:bg-gray-100 md:hover:underline'
+                className='p-5 rounded-lg mx-7 md:mx-0 text-xl font-medium text-gray-700 hover:bg-white md:hover:bg-gray-100 md:hover:underline'
             >
                 {item.menu}
             </Link>
@@ -50,7 +50,7 @@ export default function Home() {
 
                 {/* Menu links */}
                 <div>
-                    <div className='text-red'>
+                    <div className=''>
                         {isDesktop ? (
                             displayMenu()
                         ) : (
@@ -70,7 +70,7 @@ export default function Home() {
                                 >
                                     <div className='flex flex-col text-center'>
                                         <button
-                                            className='mb-7 mt-7 mr-1 flex justify-end px-5 text-xl'
+                                            className='my-7 mr-1 flex justify-end px-5 text-xl'
                                             onClick={() => toggleSidebar()}
                                         >
                                             <GrClose />
