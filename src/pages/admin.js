@@ -1,73 +1,86 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar'
 import { FaTimes } from 'react-icons/fa';
 
 const AdminPage = () => {
-  const router = useRouter();
-  const [employees, setEmployees] = useState([
-    { id: 1, name: 'Jane Smith', email: 'jane.smith@example.com', role: 'Developer' }
-  ]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
 
-  const { register, handleSubmit, setValue } = useForm();
+    const router = useRouter();
+    const [employees, setEmployees] = useState([
+      { id: 1, name: 'Jane Smith', email: 'jane.smith@example.com', role: 'Developer' }
+    ]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
-  const onSubmit = (data) => {
-    // Check if any input fields are empty
-    const hasEmptyFields = Object.values(data).some(
-      (value) => value === undefined || value === ""
-    );
+    const { register, handleSubmit, setValue } = useForm();
 
-    if (hasEmptyFields) {
-      // If any fields are empty, don't submit the form
-      return;
-    }
+    useEffect(() => {
+      const employeesString = localStorage.getItem('employees');
+      const storedEmployees = JSON.parse(employeesString);
+      if (storedEmployees) {
+        setEmployees(storedEmployees);
+      }
+    }, []);
 
-    // Check if employee exists
-    const existingEmployee = employees.find(
-      (employee) => employee.email === data.email
-    );
-    if (existingEmployee) {
-      // Update existing employee
-      const updatedEmployees = employees.map((employee) =>
-        employee.email === data.email ? { ...employee, ...data } : employee
+    useEffect(() => {
+      localStorage.setItem('employees', JSON.stringify(employees));
+    }, [employees]);
+
+    const onSubmit = (data) => {
+      // Check if any input fields are empty
+      const hasEmptyFields = Object.values(data).some(
+        (value) => value === undefined || value === ""
+      );
+
+      if (hasEmptyFields) {
+        // If any fields are empty, don't submit the form
+        return;
+      }
+
+      // Check if employee exists
+      const existingEmployee = employees.find(
+        (employee) => employee.email === data.email
+      );
+      if (existingEmployee) {
+        // Update existing employee
+        const updatedEmployees = employees.map((employee) =>
+          employee.email === data.email ? { ...employee, ...data } : employee
+        );
+        setEmployees(updatedEmployees);
+      } else {
+        // Create new employee
+        const newEmployee = {
+          id: employees.length + 1,
+          ...data,
+        };
+        setEmployees([...employees, newEmployee]);
+        setIsSubmitted(true)
+      }
+
+      // Clear form fields
+      setValue('id', '');
+      setValue('name', '');
+      setValue('email', '');
+      setValue('role', '');
+    };
+
+    const onEditEmployee = (employee) => {
+      // Populate form fields with employee data
+      setValue('id', employee.id);
+      setValue('name', employee.name);
+      setValue('email', employee.email);
+      setValue('role', employee.role);
+    };
+
+    const onDeleteEmployee = (employee) => {
+      // Remove employee from list
+      const updatedEmployees = employees.filter(
+        (emp) => emp.email !== employee.email
       );
       setEmployees(updatedEmployees);
-    } else {
-      // Create new employee
-      const newEmployee = {
-        id: employees.length + 1,
-        ...data,
-      };
-      setEmployees([...employees, newEmployee]);
-      setIsSubmitted(true)
-    }
-
-    // Clear form fields
-    setValue('id', '');
-    setValue('name', '');
-    setValue('email', '');
-    setValue('role', '');
-  };
-
-  const onEditEmployee = (employee) => {
-    // Populate form fields with employee data
-    setValue('id', employee.id);
-    setValue('name', employee.name);
-    setValue('email', employee.email);
-    setValue('role', employee.role);
-  };
-
-  const onDeleteEmployee = (employee) => {
-    // Remove employee from list
-    const updatedEmployees = employees.filter(
-      (emp) => emp.email !== employee.email
-    );
-    setEmployees(updatedEmployees);
-    setIsDeleted(false)
-  };
+      setIsDeleted(false)
+    };
 
   return (
     <div className='bg-gray-100'>
