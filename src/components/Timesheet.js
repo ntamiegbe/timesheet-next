@@ -70,7 +70,7 @@ function TimeSheet() {
         <div className="bg-gray-100 mt-14 mx-auto max-w-[60rem]">
             <div className="rounded-md bg-white mx-8 md:mx-0 shadow-md p-7">
                 <div className="flex items-center justify-between">
-                    <h1 className='py-8 text-xl text-gray-700 font-semibold'>{`Hello, ${session.data?.user?.name}. Please select a date and clock in to continue`}</h1>
+                    {/* <h1 className='py-8 text-xl text-gray-700 font-semibold'>{`Hello, ${session.data?.user?.name}. Please select a date and clock in to continue`}</h1> */}
                     {/* <img src={session.data?.user?.image} alt="Profile Logo" className='h-10 w-10 rounded border border-gray-700' /> */}
                 </div>
                 <div className="flex justify-between items-center mb-2">
